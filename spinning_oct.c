@@ -44,8 +44,8 @@ float calculateZ(int i, int j, int k) {
 }
 
 void calculateForSurface(float octX, float octY, float octZ, int ch) {
-  x = calculateX(octX, cubeY, octZ);
-  y = calculateY(octX, cubeY, octZ);
+  x = calculateX(octX, octY, octZ);
+  y = calculateY(octX, octY, octZ);
   z = calculateZ(octX, octY, octZ) + distanceFromCam;
 
   ooz = 1 / z;
@@ -78,7 +78,7 @@ int main() {
         calculateForSurface(octX, octY, -octWidth, '@');
         calculateForSurface(octWidth, octY, octX, '$');
         calculateForSurface(-octWidth, octY, -octX, '~');
-        calculateForSurface(-octX, cubeY, cubeWidth, '#');
+        calculateForSurface(-octX, octY, octWidth, '#');
         calculateForSurface(octX, -octWidth, -octY, ';');
         calculateForSurface(octX, octWidth, octY, '+');
       }
