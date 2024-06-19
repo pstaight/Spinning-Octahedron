@@ -3,8 +3,9 @@ This is a C language code to visualize a spinning octahedron using just ASCII ch
 
 ---
 
-### Tools: 
-Symbolab - to solve the matrix operations and functions 
+### Tools and sources: 
+[Symbolab](https://symbolab.com/) - to solve the matrix operations and functions.
+[Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix) - to get the rotation matrices for the calculations. 
 
 ### Modifications: 
 #### octWidth
