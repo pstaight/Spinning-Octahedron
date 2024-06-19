@@ -1,5 +1,5 @@
-# Spinning-Cube
-This is a C language code to visualize a spinning cube using just ASCII characters. Follow the guide to know more aobut the working and possible modifications. 
+# Spinning-Octahedron
+This is a C language code to visualize a spinning octahedron using just ASCII characters. Follow the guide to know more aobut the working and possible modifications. 
 
 ---
 
@@ -7,20 +7,20 @@ This is a C language code to visualize a spinning cube using just ASCII characte
 Symbolab - to solve the matrix operations and functions 
 
 ### Modifications: 
-#### cubeWidth
-  - Sets the length of one side of the cube 
-  - Change this (along with 'horizontalOffset') to get cubes of different sizes 
+#### octWidth
+  - Sets the length of one side of the octahedron 
+  - Change this (along with 'horizontalOffset') to get octahedrons of different sizes 
 
 #### backgroundASCIICode 
-  - To change the background on which the cube spins in the terminal 
+  - To change the background on which the octahedron spins in the terminal 
   - For aesthetics -> set as ' ' 
 
 ### Working: 
 Open the terminal (in mac) or command prompt (in windows). <br/>
-Go to directory in which the spinning_cube.c file is located. <br/>
+Go to directory in which the spinning_oct.c file is located. <br/>
 Run the following commands in order: 
-  - gcc spinning_cube.c
+  - gcc spinning_oct.c
   - ls (to check if 'a.out' file is created)
-  - ./a.outYou can see 
+  - ./a.out 
 <br/>
-Voila! You can see your spinning cube.
+Voila! You can see your spinning octahedron.
