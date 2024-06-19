@@ -20,8 +20,8 @@ This is a C language code to visualize a spinning octahedron using just ASCII ch
 Open the terminal (in mac) or command prompt (in windows). <br/>
 Go to directory in which the spinning_oct.c file is located. <br/>
 Run the following commands in order: 
-  - gcc spinning_oct.c
-  - ls (to check if 'a.out' file is created)
-  - ./a.out 
+  - `gcc spinning_oct.c -lm`
+  - `ls` (to check if 'a.out' file is created)
+  - `./a.out` 
 <br/>
 Voila! You can see your spinning octahedron.
