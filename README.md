@@ -25,4 +25,3 @@ Run the following commands in order:
   - ./a.out 
 <br/>
 Voila! You can see your spinning octahedron.
-test
