@@ -16,7 +16,14 @@ float K1 = 40;
 
 float incrementSpeed = 0.6;
 
-float x, y, z;
+typedef struct {
+  float x;
+  float y;
+  float z;
+} vec3;
+
+vec3 oct;
+
 float ooz;
 int xp, yp;
 int idx;
@@ -44,14 +51,14 @@ float calculateZ(int i, int j, int k) {
 }
 
 void calculateForSurface(float octX, float octY, float octZ, int ch) {
-  x = calculateX(octX, octY, octZ);
-  y = calculateY(octX, octY, octZ);
-  z = calculateZ(octX, octY, octZ) + distanceFromCam;
+  oct.x = calculateX(octX, octY, octZ);
+  oct.y = calculateY(octX, octY, octZ);
+  oct.z = calculateZ(octX, octY, octZ) + distanceFromCam;
 
-  ooz = 1 / z;
+  ooz = 1 / oct.z;
 
-  xp = (int)(width / 2 + horizontalOffset + K1 * ooz * x * 2);
-  yp = (int)(height / 2 + K1 * ooz * y);
+  xp = (int)(width / 2 + horizontalOffset + K1 * ooz * oct.x * 2);
+  yp = (int)(height / 2 + K1 * ooz * oct.y);
 
   idx = xp + yp * width;
   if (idx >= 0 && idx < width * height) {
@@ -75,11 +82,11 @@ int main() {
     
     for (float octX = -octWidth; octX < octWidth; octX += incrementSpeed) {
       for (float octY = -octWidth; octY < octWidth; octY += incrementSpeed) {
-        calculateForSurface(octX, octY, -octWidth, '@');
+        calculateForSurface(octX, octY, -octWidth, '@');// lots of this
         calculateForSurface(octWidth, octY, octX, '$');
         calculateForSurface(-octWidth, octY, -octX, '~');
         calculateForSurface(-octX, octY, octWidth, '#');
-        calculateForSurface(octX, -octWidth, -octY, ';');
+        calculateForSurface(octX, -octWidth, -octY, ';');//doesnt showup alot
         calculateForSurface(octX, octWidth, octY, '+');
       }
     }
@@ -89,9 +96,9 @@ int main() {
       putchar(k % width ? buffer[k] : 10);
     }
 
-    A += 0.05;
-    B += 0.05;
-    C += 0.01;
+    A += 0.0;
+    B += 0.0;
+    C += 0.0;
     
     usleep(8000 * 2);
   }
