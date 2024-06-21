@@ -5,7 +5,7 @@
 
 float A, B, C;
 
-float cubeWidth = 20;
+float octWidth = 20;
 int width = 160, height = 44;
 float zBuffer[160 * 44];
 char buffer[160 * 44];
@@ -16,7 +16,14 @@ float K1 = 40;
 
 float incrementSpeed = 0.6;
 
-float x, y, z;
+typedef struct {
+  float x;
+  float y;
+  float z;
+} vec3;
+
+vec3 oct;
+
 float ooz;
 int xp, yp;
 int idx;
@@ -36,15 +43,15 @@ float calculateZ(int i, int j, int k) {
   return (k * cos(A) * cos(B) - j * sin(A) * cos(B) + i * sin(B));
 }
 
-void calculateForSurface(float cubeX, float cubeY, float cubeZ, int ch) {
-  x = calculateX(cubeX, cubeY, cubeZ);
-  y = calculateY(cubeX, cubeY, cubeZ);
-  z = calculateZ(cubeX, cubeY, cubeZ) + distanceFromCam;
+void calculateForSurface(float octX, float octY, float octZ, int ch) {
+  oct.x = calculateX(octX, octY, octZ);
+  oct.y = calculateY(octX, octY, octZ);
+  oct.z = calculateZ(octX, octY, octZ) + distanceFromCam;
 
-  ooz = 1 / z;
+  ooz = 1 / oct.z;
 
-  xp = (int)(width / 2 + horizontalOffset + K1 * ooz * x * 2);
-  yp = (int)(height / 2 + K1 * ooz * y);
+  xp = (int)(width / 2 + horizontalOffset + K1 * ooz * oct.x * 2);
+  yp = (int)(height / 2 + K1 * ooz * oct.y);
 
   idx = xp + yp * width;
   if (idx >= 0 && idx < width * height) {
@@ -61,51 +68,18 @@ int main() {
     memset(buffer, backgroundASCIICode, width * height);
     memset(zBuffer, 0, width * height * 4);
 
-    // first cube
-    cubeWidth = 20;
-    horizontalOffset = -2 * cubeWidth;
+    // first oct
+    octWidth = 20;
+    horizontalOffset = -2 * octWidth;
 
-    for (float cubeX = -cubeWidth; cubeX < cubeWidth; cubeX += incrementSpeed) {
-      for (float cubeY = -cubeWidth; cubeY < cubeWidth;
-           cubeY += incrementSpeed) {
-        calculateForSurface(cubeX, cubeY, -cubeWidth, '@');
-        calculateForSurface(cubeWidth, cubeY, cubeX, '$');
-        calculateForSurface(-cubeWidth, cubeY, -cubeX, '~');
-        calculateForSurface(-cubeX, cubeY, cubeWidth, '#');
-        calculateForSurface(cubeX, -cubeWidth, -cubeY, ';');
-        calculateForSurface(cubeX, cubeWidth, cubeY, '+');
-      }
-    }
-
-    // second cube
-    cubeWidth = 10;
-    horizontalOffset = 1 * cubeWidth;
-
-    for (float cubeX = -cubeWidth; cubeX < cubeWidth; cubeX += incrementSpeed) {
-      for (float cubeY = -cubeWidth; cubeY < cubeWidth;
-           cubeY += incrementSpeed) {
-        calculateForSurface(cubeX, cubeY, -cubeWidth, '@');
-        calculateForSurface(cubeWidth, cubeY, cubeX, '$');
-        calculateForSurface(-cubeWidth, cubeY, -cubeX, '~');
-        calculateForSurface(-cubeX, cubeY, cubeWidth, '#');
-        calculateForSurface(cubeX, -cubeWidth, -cubeY, ';');
-        calculateForSurface(cubeX, cubeWidth, cubeY, '+');
-      }
-    }
-
-    // third cube
-    cubeWidth = 5;
-    horizontalOffset = 8 * cubeWidth;
-
-    for (float cubeX = -cubeWidth; cubeX < cubeWidth; cubeX += incrementSpeed) {
-      for (float cubeY = -cubeWidth; cubeY < cubeWidth;
-           cubeY += incrementSpeed) {
-        calculateForSurface(cubeX, cubeY, -cubeWidth, '@');
-        calculateForSurface(cubeWidth, cubeY, cubeX, '$');
-        calculateForSurface(-cubeWidth, cubeY, -cubeX, '~');
-        calculateForSurface(-cubeX, cubeY, cubeWidth, '#');
-        calculateForSurface(cubeX, -cubeWidth, -cubeY, ';');
-        calculateForSurface(cubeX, cubeWidth, cubeY, '+');
+    for (float octX = -octWidth; octX < octWidth; octX += incrementSpeed) {
+      for (float octY = -octWidth; octY < octWidth; octY += incrementSpeed) {
+        calculateForSurface(octX, octY, -octWidth, '@'); // lots of this
+        calculateForSurface(octWidth, octY, octX, '$');
+        calculateForSurface(-octWidth, octY, -octX, '~');
+        calculateForSurface(-octX, octY, octWidth, '#');
+        calculateForSurface(octX, -octWidth, -octY, ';'); // doesnt showup alot
+        calculateForSurface(octX, octWidth, octY, '+');
       }
     }
 
@@ -114,9 +88,9 @@ int main() {
       putchar(k % width ? buffer[k] : 10);
     }
 
-    A += 0.05;
-    B += 0.05;
-    C += 0.01;
+    A += 0.0;
+    B += 0.0;
+    C += 0.0;
 
     usleep(8000 * 2);
   }
