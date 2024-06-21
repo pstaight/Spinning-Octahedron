@@ -36,10 +36,36 @@ vec3 isHighest(vec3 p1, vec3 p2, vec3 p3) {
 
 int main() {
   printf("\x1b[2J");
+  p1.x = 10;
+  p1.y = 20;
+  p1.z = 30;
+
+  p2.x = 10;
+  p2.y = 30;
+  p2.z = 30;
+
+  p3.x = 10;
+  p3.y = 40;
+  p3.z = 30;
+
   while (1) {
     memset(buff, ' ', width * height);
     memset(zbuff, 0, width * height * 4);
-    isHighest(p1, p2, p3);
+    vec3 highestY = isHighest(p1, p2, p3);
+    if (highestY.y == p1.y && highestY.x == p1.x && highestY.z == p1.z) {
+      buff[30 * 20] = '@';
+    } else if (highestY.y == p2.y && highestY.x == p2.x && highestY.z == p2.z) {
+      buff[20 * 20] = '+';
+    } else if (highestY.y == p3.y && highestY.x == p3.x && highestY.z == p3.z) {
+      buff[40 * 20] = '!';
+    } else {
+      return 1;
+    }
+  }
+
+  printf("\x1b[H");
+  for (int k = 0; k < width * height; k++) {
+    putchar(k % width ? buff[k] : 10);
   }
   return 0;
 }
