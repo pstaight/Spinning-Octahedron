@@ -53,19 +53,16 @@ int main() {
     memset(zbuff, 0, width * height * 4);
     vec3 highestY = isHighest(p1, p2, p3);
     if (highestY.y == p1.y && highestY.x == p1.x && highestY.z == p1.z) {
-      buff[30 * 20] = '@';
+      buff[142] = '@';
     } else if (highestY.y == p2.y && highestY.x == p2.x && highestY.z == p2.z) {
-      buff[20 * 20] = '+';
-    } else if (highestY.y == p3.y && highestY.x == p3.x && highestY.z == p3.z) {
-      buff[40 * 20] = '!';
+      buff[142] = '+';
     } else {
-      return 1;
+      buff[ 142 ] = '!';
     }
-  }
-
   printf("\x1b[H");
   for (int k = 0; k < width * height; k++) {
     putchar(k % width ? buff[k] : 10);
+  }
   }
   return 0;
 }

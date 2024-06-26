@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-// test
 
 float A, B, C;
 
@@ -90,7 +89,7 @@ int main() {
       putchar(k % width ? buffer[k] : 10);
     }
 
-    A += 0.0;
+    A += 0.1;
     B += 0.0;
     C += 0.0;
 
