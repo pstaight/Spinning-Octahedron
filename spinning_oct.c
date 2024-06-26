@@ -18,9 +18,7 @@ float K1 = 40;
 float incrementSpeed = 0.6;
 
 typedef struct {
-  float x;
-  float y;
-  float z;
+  float x, y, z;
 } vec3;
 
 vec3 oct;
