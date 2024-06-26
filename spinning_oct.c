@@ -58,7 +58,7 @@ void drawPoint(vec3 p1,char paint){
 }
 
 void drawTriangle(vec3 p1, vec3 p2, vec3 p3, char paint){
-  vec3 top, mid, bot, oct;
+  vec3 top, mid, bot;
     if (p1.y > p2.y && p1.y > p3.y) {
     // the y value of the point "p1" is larger than every other point
     top = p1;
@@ -105,12 +105,12 @@ int main() {
     octWidth = 20;
     horizontalOffset = -2 * octWidth;
     drawTriangle(p1,p2,p3,'@');
-    drawTriangle(p1,p2,p4,'$');
-    drawTriangle(p1,p5,p4,'~');
+    drawTriangle(p1,p3,p4,'$');
+    drawTriangle(p1,p4,p5,'~');
     drawTriangle(p1,p5,p2,'#');
     drawTriangle(p6,p2,p3,';');
-    drawTriangle(p6,p2,p4,'+');
-    drawTriangle(p6,p5,p4,'M');
+    drawTriangle(p6,p3,p4,'+');
+    drawTriangle(p6,p4,p5,'M');
     drawTriangle(p6,p5,p2,'|');
 
     printf("\x1b[H");
