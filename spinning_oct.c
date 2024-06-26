@@ -112,8 +112,8 @@ int main() {
   p2.y = 0;
   p2.z = 0;
   p4.x = -octWidth;
-  p2.y = 0;
-  p2.z = 0;
+  p4.y = 0;
+  p4.z = 0;
 
   // front and back
   p3.x = 0;
