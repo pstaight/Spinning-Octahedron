@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-
 float A, B, C;
 
 float octWidth = 20;
@@ -36,14 +35,14 @@ float calculateZ(int i, int j, int k) {
   return (k * cos(A) * cos(B) - j * sin(A) * cos(B) + i * sin(B));
 }
 
-void drawPoint(vec3 p1,char paint){
+void drawPoint(vec3 p1, char paint) {
   vec3 p1_rotated;
   float ooz;
-  int xp,yp,idx;
+  int xp, yp, idx;
   p1_rotated.x = calculateX(p1.x, p1.y, p1.z);
   p1_rotated.y = calculateY(p1.x, p1.y, p1.z);
   p1_rotated.z = calculateZ(p1.x, p1.y, p1.z) + distanceFromCam;
-        
+
   ooz = 1 / p1_rotated.z;
   xp = (int)(p1_rotated.x + horizontalOffset + width / 2);
   yp = (int)(p1_rotated.y + height / 2);
@@ -57,45 +56,72 @@ void drawPoint(vec3 p1,char paint){
   }
 }
 
-void drawTriangle(vec3 p1, vec3 p2, vec3 p3, char paint){
+void drawTriangle(vec3 p1, vec3 p2, vec3 p3, char paint) {
   vec3 top, mid, bot;
-    if (p1.y > p2.y && p1.y > p3.y) {
+  if (p1.y > p2.y && p1.y > p3.y) {
     // the y value of the point "p1" is larger than every other point
     top = p1;
-    if(p2.y > p3.y){mid=p2;bot=p3;}
-    else{mid=p3;bot=p2;}
+    if (p2.y > p3.y) {
+      mid = p2;
+      bot = p3;
+    } else {
+      mid = p3;
+      bot = p2;
+    }
   } else if (p2.y > p1.y && p2.y > p3.y) {
     // the y value of the point "p2" is larger than every other point
     top = p2;
-    if(p1.y > p3.y){mid=p1;bot=p3;}
-    else{mid=p3;bot=p1;}
+    if (p1.y > p3.y) {
+      mid = p1;
+      bot = p3;
+    } else {
+      mid = p3;
+      bot = p1;
+    }
   } else if (p3.y > p1.y && p3.y > p2.y) {
     // the y value of the point "p3" is larger than every other point
     top = p3;
-    if(p2.y > p1.y){mid=p2;bot=p1;}
-    else{mid=p1;bot=p2;}
+    if (p2.y > p1.y) {
+      mid = p2;
+      bot = p1;
+    } else {
+      mid = p1;
+      bot = p2;
+    }
   }
-  //todo: fill in the triangle instead of just drawing its 3 points.
-  drawPoint(top,paint);
-  drawPoint(mid,paint);
-  drawPoint(bot,paint);
+  // TODO: fill in the triangle instead of just drawing its 3 points.
+  drawPoint(top, paint);
+  drawPoint(mid, paint);
+  drawPoint(bot, paint);
 }
 
 int main() {
   printf("\x1b[2J");
-  vec3 p1,p2,p3,p4,p5,p6;
+  vec3 p1, p2, p3, p4, p5, p6;
   octWidth = 20;
-  //top and bottom
-  p1.x = 0; p1.y = octWidth; p1.z = 0;
-  p6.x = 0; p6.y =-octWidth; p6.z = 0;
+  // top and bottom
+  p1.x = 0;
+  p1.y = octWidth;
+  p1.z = 0;
+  p6.x = 0;
+  p6.y = -octWidth;
+  p6.z = 0;
 
-  //left and right
-  p2.x = octWidth; p2.y = 0; p2.z = 0;
-  p4.x =-octWidth; p2.y = 0; p2.z = 0;
+  // left and right
+  p2.x = octWidth;
+  p2.y = 0;
+  p2.z = 0;
+  p4.x = -octWidth;
+  p2.y = 0;
+  p2.z = 0;
 
-  //front and back
-  p3.x = 0; p3.y = 0; p3.z = octWidth;
-  p5.x = 0; p5.y = 0; p5.z =-octWidth;
+  // front and back
+  p3.x = 0;
+  p3.y = 0;
+  p3.z = octWidth;
+  p5.x = 0;
+  p5.y = 0;
+  p5.z = -octWidth;
 
   while (1) {
     memset(buffer, backgroundASCIICode, width * height);
@@ -104,14 +130,14 @@ int main() {
     // first oct
     octWidth = 20;
     horizontalOffset = -2 * octWidth;
-    drawTriangle(p1,p2,p3,'@');
-    drawTriangle(p1,p3,p4,'$');
-    drawTriangle(p1,p4,p5,'~');
-    drawTriangle(p1,p5,p2,'#');
-    drawTriangle(p6,p2,p3,';');
-    drawTriangle(p6,p3,p4,'+');
-    drawTriangle(p6,p4,p5,'M');
-    drawTriangle(p6,p5,p2,'|');
+    drawTriangle(p1, p2, p3, '@');
+    drawTriangle(p1, p3, p4, '$');
+    drawTriangle(p1, p4, p5, '~');
+    drawTriangle(p1, p5, p2, '#');
+    drawTriangle(p6, p2, p3, ';');
+    drawTriangle(p6, p3, p4, '+');
+    drawTriangle(p6, p4, p5, 'M');
+    drawTriangle(p6, p5, p2, '|');
 
     printf("\x1b[H");
     for (int k = 0; k < width * height; k++) {
