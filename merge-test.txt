@@ -1,0 +1,2 @@
+file for test merging conflicts. :)
+Here is my addition to the merge conflict test.
