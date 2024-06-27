@@ -3,6 +3,8 @@
 #include <string.h>
 #include <unistd.h>
 
+// merge test
+
 float A, B, C;
 
 float octWidth = 20;
