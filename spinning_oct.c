@@ -92,9 +92,30 @@ void drawTriangle(vec3 p1, vec3 p2, vec3 p3, char paint) {
     }
   }
   // TODO: fill in the triangle instead of just drawing its 3 points.
-  drawPoint(top, paint);
-  drawPoint(mid, paint);
-  drawPoint(bot, paint);
+
+  for (int i = 0; i < height; i++) {
+    for (int j = 0; j < width; j++) {
+      vec3 p;
+      p.x = i += j;
+      p.y = i += j;
+      p.z = i += j;
+      if (p.x < p1.x && p.y < p1.y && p.z < p1.z && p.x < p2.x && p.y < p2.y &&
+          p.z < p2.z) {
+        int idx2;
+        float ooz = 1 / p.z;
+        if (idx2 >= 0 && idx2 < width * height) {
+          if (ooz > zBuffer[idx2]) {
+            zBuffer[idx2] = ooz;
+            buffer[idx2] = paint;
+          }
+        }
+      }
+    }
+  }
+
+  drawPoint(p1, paint);
+  drawPoint(p2, paint);
+  drawPoint(p3, paint);
 }
 
 int main() {
@@ -102,27 +123,27 @@ int main() {
   vec3 p1, p2, p3, p4, p5, p6;
   octWidth = 20;
   // top and bottom
-  p1.x = 0;
+  p1.x = 1;
   p1.y = octWidth;
-  p1.z = 0;
-  p6.x = 0;
+  p1.z = 1;
+  p6.x = -1;
   p6.y = -octWidth;
-  p6.z = 0;
+  p6.z = -1;
 
   // left and right
   p2.x = octWidth;
-  p2.y = 0;
-  p2.z = 0;
+  p2.y = -1;
+  p2.z = -1;
   p4.x = -octWidth;
-  p2.y = 0;
-  p2.z = 0;
+  p2.y = 1;
+  p2.z = 1;
 
   // front and back
-  p3.x = 0;
-  p3.y = 0;
+  p3.x = 1;
+  p3.y = 1;
   p3.z = octWidth;
-  p5.x = 0;
-  p5.y = 0;
+  p5.x = -1;
+  p5.y = -1;
   p5.z = -octWidth;
 
   while (1) {
@@ -131,7 +152,7 @@ int main() {
 
     // first oct
     octWidth = 20;
-    horizontalOffset = -2 * octWidth;
+    horizontalOffset = -1 * octWidth;
     drawTriangle(p1, p2, p3, '@');
     drawTriangle(p1, p3, p4, '$');
     drawTriangle(p1, p4, p5, '~');
