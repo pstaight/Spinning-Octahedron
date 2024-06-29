@@ -99,8 +99,7 @@ void drawTriangle(vec3 p1, vec3 p2, vec3 p3, char paint) {
       p.x = i += j;
       p.y = i += j;
       p.z = i += j;
-      if (p.x < p1.x && p.y < p1.y && p.z < p1.z && p.x < p2.x && p.y < p2.y &&
-          p.z < p2.z) {
+      if (p.x < p1.x && p.y < p1.y && p.x < p2.x && p.y < p2.y) {
         int idx2;
         float ooz = 1 / p.z;
         if (idx2 >= 0 && idx2 < width * height) {
