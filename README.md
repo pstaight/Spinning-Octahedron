@@ -24,6 +24,6 @@ Run the following commands in order:
   - `ls` (to check if 'a.out' file is created)
   - `./a.out` 
 <br/>
-Voila! You can see your spinning octahedron.
+Voila! You can see your spinning octahedron.<br/>
 
 <img width="512" height="512" alt="spinning oct v1 0" src="https://github.com/user-attachments/assets/82812a81-df09-497d-8216-d5d2c781c7b5" />
