@@ -25,3 +25,4 @@ Run the following commands in order:
   - `./a.out` 
 <br/>
 Voila! You can see your spinning octahedron.
+<img width="618" height="696" alt="spinning oct" src="https://github.com/user-attachments/assets/fe4557ed-c497-4ce2-8c54-3870719b8ed5" />
